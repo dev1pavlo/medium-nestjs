@@ -34,6 +34,12 @@ export class ArticleService {
     };
   }
 
+  async findBySlug(slug: string): Promise<ArticleEntity> {
+    return this.articleRepository.findOne({
+      where: { slug },
+    });
+  }
+
   private getSlug(title: string) {
     return `${slugify(title, { lower: true })}-${(
       (Math.random() * Math.pow(36, 6)) |
