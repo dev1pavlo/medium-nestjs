@@ -44,6 +44,19 @@ export class ArticleService {
       });
     }
 
+    if (query.favorited) {
+      const author = await this.userRepository.findOne({
+        where: { username: query.favorited },
+        relations: { favorites: true },
+      });
+      const ids = author.favorites.map((el) => el.id);
+      if (ids.length) {
+        queryBuilder.andWhere('articles.authorId IN (:...ids)', { ids });
+      } else {
+        queryBuilder.andWhere('1=0');
+      }
+    }
+
     const articlesCount = await queryBuilder.getCount();
 
     if (query.limit) {
@@ -54,9 +67,24 @@ export class ArticleService {
       queryBuilder.offset(query.offset);
     }
 
-    const articles = await queryBuilder.getMany();
+    let favoriteIds: number[] = [];
 
-    return { articles, articlesCount };
+    if (userId) {
+      const currentUser = await this.userRepository.findOne({
+        where: { id: userId },
+        relations: { favorites: true },
+      });
+
+      favoriteIds = currentUser.favorites.map((el) => el.id);
+    }
+
+    const articles = await queryBuilder.getMany();
+    const articlesWithFavorites = articles.map((article) => {
+      const favorited = favoriteIds.includes(article.id);
+      return { ...article, favorited };
+    });
+
+    return { articles: articlesWithFavorites, articlesCount };
   }
 
   async createArticle(
