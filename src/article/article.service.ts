@@ -154,4 +154,33 @@ export class ArticleService {
 
     return article;
   }
+
+  async removeFromFavorites(
+    slug: string,
+    userId: number,
+  ): Promise<ArticleEntity> {
+    const article = await this.findBySlug(slug);
+    if (!article) {
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND);
+    }
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: {
+        favorites: true,
+      },
+    });
+
+    const articleIndex = user.favorites.findIndex(
+      (favoritedArticle) => favoritedArticle.id === article.id,
+    );
+
+    if (articleIndex >= 0) {
+      user.favorites.splice(articleIndex, 1);
+      article.favoritesCount--;
+      await this.userRepository.save(user);
+      await this.articleRepository.save(article);
+    }
+
+    return article;
+  }
 }
