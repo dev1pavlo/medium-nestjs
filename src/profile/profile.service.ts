@@ -20,13 +20,14 @@ export class ProfileService {
   ): Promise<ProfileType> {
     const user = await this.userRepository.findOne({ where: { username } });
 
-    const following = false;
+    const follow = await this.followRepository.findOne({
+      where: {
+        followerId: currentUserId,
+        followingId: user.id,
+      },
+    });
 
-    if (currentUserId) {
-      // change here
-    }
-
-    return { ...user, following };
+    return { ...user, following: Boolean(follow) };
   }
 
   async followProfile(
@@ -58,6 +59,27 @@ export class ProfileService {
     }
 
     return { ...user, following: true };
+  }
+
+  async unfollowProfile(
+    username: string,
+    currentUserId: number,
+  ): Promise<ProfileType> {
+    const user = await this.userRepository.findOne({ where: { username } });
+
+    if (currentUserId === user.id) {
+      throw new HttpException(
+        'Follower and following can`t be equal',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    await this.followRepository.delete({
+      followerId: currentUserId,
+      followingId: user.id,
+    });
+
+    return { ...user, following: false };
   }
 
   dumpProfile(profile: ProfileType): ProfileResponse {
