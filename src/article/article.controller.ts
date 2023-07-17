@@ -79,4 +79,18 @@ export class ArticleController {
 
     return this.articleService.dumpArticle(article);
   }
+
+  @Post(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async addToFavorites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string,
+  ): Promise<IArticleResponse> {
+    const article = await this.articleService.addToFavorites(
+      slug,
+      currentUserId,
+    );
+
+    return this.articleService.dumpArticle(article);
+  }
 }
