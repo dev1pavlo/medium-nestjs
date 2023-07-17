@@ -18,6 +18,7 @@ import { CreateArticleDto } from './dto/createArticle.dto';
 import { IArticleResponse } from './types/articleResponse.interface';
 import { UpdateArticleDto } from './dto/updateArticle.dto';
 import { IArticlesResponse } from './types/articlesResponse.interface';
+import { CustomValidationPipe } from '@app/shared/pipes/CustomValidation.pipe';
 @Controller('articles')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
@@ -31,7 +32,7 @@ export class ArticleController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
+  @UsePipes(new CustomValidationPipe())
   @UseGuards(AuthGuard)
   async create(
     @User() currentUser,
