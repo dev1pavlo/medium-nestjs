@@ -16,6 +16,7 @@ import { UserEntity } from './user.entity';
 import { AuthGuard } from './guards/auth.guard';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { CustomValidationPipe } from '@app/shared/pipes/CustomValidation.pipe';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 export class UserController {
@@ -32,6 +33,8 @@ export class UserController {
   }
 
   @Post('users/login')
+  @ApiOperation({ summary: 'Login user' })
+  @ApiResponse({ status: 200, description: 'Success.', type: UserEntity })
   @UsePipes(new CustomValidationPipe())
   async loginUser(
     @Body('user') loginUserDto: LoginUserDto,

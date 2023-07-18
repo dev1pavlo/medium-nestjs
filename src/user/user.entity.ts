@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { hash } from 'bcrypt';
 import { ArticleEntity } from '@app/article/article.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -17,6 +18,7 @@ export class UserEntity {
   id: number;
 
   @Column()
+  @ApiProperty({ example: 'user@mail.com', description: 'User email' })
   email: string;
 
   @Column()
