@@ -1,4 +1,4 @@
-import { UserEntity } from '@app/user/user.entity';
+import { UserEntity } from 'user/user.entity';
 import { type Request } from 'express';
 
 export interface IExpressRequest extends Request {

@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { ProfileResponse } from './types/profileResponse.interface';
-import { User } from '@app/user/decorators/user.decorator';
-import { AuthGuard } from '@app/user/guards/auth.guard';
+import { User } from 'user/decorators/user.decorator';
+import { AuthGuard } from 'user/guards/auth.guard';
 
 @Controller('profiles')
 export class ProfileController {

@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ProfileController } from './profile.controller';
 import { ProfileService } from './profile.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from '@app/user/user.entity';
+import { UserEntity } from 'user/user.entity';
 import { FollowEntity } from './follow.entity';
-import { AuthGuard } from '@app/user/guards/auth.guard';
+import { AuthGuard } from 'user/guards/auth.guard';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, FollowEntity])],

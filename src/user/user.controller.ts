@@ -15,7 +15,7 @@ import { User } from './decorators/user.decorator';
 import { UserEntity } from './user.entity';
 import { AuthGuard } from './guards/auth.guard';
 import { UpdateUserDto } from './dto/updateUser.dto';
-import { CustomValidationPipe } from '@app/shared/pipes/CustomValidation.pipe';
+import { CustomValidationPipe } from 'shared/pipes/CustomValidation.pipe';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller()

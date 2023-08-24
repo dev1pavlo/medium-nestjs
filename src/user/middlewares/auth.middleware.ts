@@ -1,5 +1,5 @@
-import { JWT_TOKEN } from '@app/config';
-import { IExpressRequest } from '@app/types/expressRequest.interface';
+import { JWT_TOKEN } from 'config';
+import { IExpressRequest } from 'types/expressRequest.interface';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Response } from 'express';
 import { JwtPayload, verify } from 'jsonwebtoken';

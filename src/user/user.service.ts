@@ -4,7 +4,7 @@ import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { sign } from 'jsonwebtoken';
-import { JWT_TOKEN } from '@app/config';
+import { JWT_TOKEN } from 'config';
 import { IUserResponse } from './types/userResponse.interface';
 import { LoginUserDto } from './dto/loginUser.dto';
 import { compare } from 'bcrypt';

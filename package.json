@@ -17,8 +17,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/ormdatasource.ts",
+    "typeorm:js": "node ./node_modules/typeorm/cli.js -d dist/ormdatasource.js",
     "migration:generate": "npm run typeorm migration:generate -- --pretty",
     "migration:run": "npm run typeorm migration:run",
+    "migration:run:js": "npm run typeorm:js migration:run",
     "migration:undo": "npm run typeorm migration:revert"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.5",
+    "@flydotio/dockerfile": "^0.4.8",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
@@ -84,7 +87,7 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
-  "_moduleAliases": {
-    "@app/": "./dist"
+  "engines": {
+    "node": "18.16.1"
   }
 }

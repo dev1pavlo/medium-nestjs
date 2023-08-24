@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArticleEntity } from './article.entity';
 import { DataSource, DeleteResult, Repository } from 'typeorm';
-import { UserEntity } from '@app/user/user.entity';
+import { UserEntity } from 'user/user.entity';
 import { CreateArticleDto } from './dto/createArticle.dto';
 import { IArticleResponse } from './types/articleResponse.interface';
 import slugify from 'slugify';

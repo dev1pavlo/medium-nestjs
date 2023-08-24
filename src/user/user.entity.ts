@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { hash } from 'bcrypt';
-import { ArticleEntity } from '@app/article/article.entity';
+import { ArticleEntity } from 'article/article.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'users' })

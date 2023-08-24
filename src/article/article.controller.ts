@@ -11,13 +11,13 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { ArticleService } from './article.service';
-import { AuthGuard } from '@app/user/guards/auth.guard';
-import { User } from '@app/user/decorators/user.decorator';
+import { AuthGuard } from 'user/guards/auth.guard';
+import { User } from 'user/decorators/user.decorator';
 import { CreateArticleDto } from './dto/createArticle.dto';
 import { IArticleResponse } from './types/articleResponse.interface';
 import { UpdateArticleDto } from './dto/updateArticle.dto';
 import { IArticlesResponse } from './types/articlesResponse.interface';
-import { CustomValidationPipe } from '@app/shared/pipes/CustomValidation.pipe';
+import { CustomValidationPipe } from 'shared/pipes/CustomValidation.pipe';
 @Controller('articles')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
